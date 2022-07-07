@@ -1,0 +1,18 @@
+{
+  "units": 
+  [{
+  "unitName": "Archers",
+  "defeats": "Pikemen",
+  "defeatedBy": "Cavalry"
+  },
+  {
+  "unitName": "Pikemen",
+  "defeats": "Cavalry",
+  "defeatedBy": "Archers"
+  },
+  {
+  "unitName": "Cavalry",
+  "defeats": "Archers",
+  "defeatedBy": "Pikemen"
+  }]
+}
