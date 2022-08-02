@@ -1,6 +1,7 @@
-import ActionButtons from './components/ActionButtons';
-import RoundResults from './components/RoundResults';
-import UnitCards from './components/UnitCards';
+import React from "react";
+import ActionButtons from "./components/ActionButtons";
+import RoundResults from "./components/RoundResults";
+import UnitCards from "./components/UnitCards";
 
 const App = () => {
   return (
@@ -10,6 +11,6 @@ const App = () => {
       <ActionButtons />
     </div>
   );
-}
+};
 
 export default App;

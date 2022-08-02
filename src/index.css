@@ -1,11 +1,10 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 .game-window {
-
   display: block;
   position: relative;
   border: solid 2px #000;
@@ -31,7 +30,8 @@ body {
   background-color: #f5f5f5;
 }
 
-.results-window h1, h2 {
+.results-window h1,
+h2 {
   margin: 10px 0;
 }
 

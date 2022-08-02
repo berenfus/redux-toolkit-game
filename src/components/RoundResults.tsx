@@ -1,68 +1,42 @@
-import { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { IGameState } from "../redusers/gameReduser";
+import { RootState } from "../store";
 
 const RoundResults = () => {
-  const gameState = useSelector((state:IGameState) => state.game);
-  const currentScore = useSelector((state:IGameState) => state.currentScore);
-  const roundResult = useSelector((state:IGameState) => state.roundResult);
-  const maxRound = useSelector((state:IGameState) => state.maxRounds)
+  const { isGame, maxRounds } = useSelector((state: RootState) => state.game);
+  const { score } = useSelector((state: RootState) => state.round);
+  const { round, playerUnitName, computerUnitName } = useSelector(
+    (state: RootState) => state.lastRound
+  );
 
-  const [open, setOpen] = useState(false);
+  const textResult = (isLast: boolean) => {
+    if (score > 0) return isLast ? "You win! Congratulations!" : "Victory!";
 
-  const textResult = (result: number) => {
-    if(result === 1) return 'Victory!';
-    
-    if(result === 0 ) {
-      return 'Draw.';
-    } else {
-      return 'Defeat!';
+    if (score === 0) {
+      return isLast ? "This game ended in a draw" : "Draw.";
     }
-  }
 
-  if (gameState && !roundResult) {
+    return isLast ? "You lose... Try again!" : "Defeat!";
+  };
+
+  if (round) {
     return (
       <div className="results-window">
-        <h2>Score: {currentScore}</h2>
+        <h2>Score: {score}</h2>
+        <h1>
+          Round {round} result: {textResult(maxRounds === round)}
+        </h1>
+        <h2>
+          {playerUnitName} (Player) vs. {computerUnitName} (Computer)
+        </h2>
       </div>
     );
   }
 
-  if(roundResult?.currentRound === maxRound) {
-    if(currentScore > 0) {
-      return (
-        <div className="results-window">
-          <h2>Score: {currentScore}</h2>
-          <h2>You win! Congratulations!</h2>
-        </div>
-      );
-    }
-
-    if(currentScore === 0) {
-      return (
-        <div className="results-window">
-          <h2>Score: {currentScore}</h2>
-          <h2>This game ended in a draw</h2>
-        </div>
-      );
-    }
-
-    if(currentScore < 0) {
-      return (
-        <div className="results-window">
-          <h2>Score: {currentScore}</h2>
-          <h2>You lose... Try  again later!</h2>
-        </div>
-      );
-    }
-  } else
-
-  if (roundResult) {
+  if (isGame) {
     return (
       <div className="results-window">
-        <h2>Score: {currentScore}</h2>
-        <h1>Round {roundResult.currentRound} result: {textResult(roundResult.result)} </h1>
-        <h2>{roundResult.playersUnit?.unitName} (Player) vs. {roundResult.computersUnit?.unitName} (Computer)</h2>
+        <h2>Score: {score}</h2>
       </div>
     );
   }
@@ -72,6 +46,6 @@ const RoundResults = () => {
       <h1>Frontend challenge!</h1>
     </div>
   );
-}
+};
 
 export default RoundResults;
